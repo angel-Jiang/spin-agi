@@ -15,48 +15,31 @@
             flex-direction: column;
             justify-content: center;
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 247, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(0, 196, 204, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 50% 40%, rgba(0, 247, 255, 0.03) 0%, transparent 70%),
+                radial-gradient(circle at 70% 70%, rgba(0, 196, 204, 0.02) 0%, transparent 80%);
         }
         .logo-container {
             position: relative;
-            margin-bottom: 40px; /* 增加LOGO与标语间距 */
+            margin-bottom: 30px;
         }
         .logo {
-            width: 220px; /* 适当放大LOGO */
-            filter: drop-shadow(0 0 25px rgba(0, 247, 255, 0.4));
-            transition: transform 0.4s ease;
+            width: 220px;
+            /* 纯发光圆球效果 */
+            filter: 
+                drop-shadow(0 0 15px rgba(0, 247, 255, 0.7))
+                drop-shadow(0 0 30px rgba(0, 196, 204, 0.4))
+                brightness(1.2);
+            animation: pulse 3s infinite alternate;
             cursor: pointer;
         }
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        .logo-tooltip {
-            visibility: hidden;
-            width: 200px;
-            background: rgba(0, 30, 40, 0.9);
-            color: #00f7ff;
-            text-align: center;
-            border-radius: 4px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 110%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            border: 1px solid rgba(0, 247, 255, 0.3);
-            font-size: 0.95rem;
-        }
-        .logo-container:hover .logo-tooltip {
-            visibility: visible;
-            opacity: 1;
+        @keyframes pulse {
+            0% { opacity: 0.95; filter: drop-shadow(0 0 10px rgba(0, 247, 255, 0.6)); }
+            100% { opacity: 1; filter: drop-shadow(0 0 25px rgba(0, 247, 255, 0.9)); }
         }
         .tagline {
-            font-size: 1.5rem; /* 放大标语字号 */
+            font-size: 1.4rem;
             letter-spacing: 2px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
             line-height: 1.6;
             max-width: 500px;
             background: linear-gradient(90deg, #fff, #00f7ff);
@@ -79,8 +62,7 @@
 </head>
 <body>
     <div class="logo-container">
-        <img src="spin-logo.png" alt="SPIN Logo" class="logo">
-        <div class="logo-tooltip">Future in progress</div>
+        <img src="spin-logo.png" alt="" class="logo"> <!-- 移除alt文字 -->
     </div>
     
     <div class="tagline">The calm before the creative storm</div>
@@ -88,7 +70,7 @@
     <div class="contact">Contact: info@spin-agi.com</div>
     <div class="copyright">© 2025 SPIN AGI. All Rights Reserved.</div>
 
-    <!-- 动态粒子背景 -->
+    <!-- 星空粒子背景 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.createElement('canvas');
@@ -96,7 +78,7 @@
             canvas.style.top = '0';
             canvas.style.left = '0';
             canvas.style.zIndex = '-1';
-            canvas.style.opacity = '0.15';
+            canvas.style.opacity = '0.12';
             document.body.prepend(canvas);
             
             const ctx = canvas.getContext('2d');
@@ -106,13 +88,15 @@
             const particles = [];
             const colors = ['#00f7ff', '#00c4cc', '#ffffff'];
             
-            for (let i = 0; i < 60; i++) {
+            // 减少粒子数量增强深空感
+            for (let i = 0; i < 40; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 1.5 + 0.5,
+                    size: Math.random() * 1.2 + 0.3,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    speed: Math.random() * 0.3 + 0.1
+                    speed: Math.random() * 0.2 + 0.05,
+                    alpha: Math.random() * 0.6 + 0.2
                 });
             }
             
@@ -120,9 +104,9 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
                 particles.forEach(p => {
-                    ctx.fillStyle = p.color;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color.replace(')', `, ${p.alpha})`).replace('rgb', 'rgba');
                     ctx.fill();
                     
                     p.y -= p.speed;
