@@ -15,41 +15,45 @@
             flex-direction: column;
             justify-content: center;
         }
-        /* 纯发光圆球LOGO */
+        /* 多层同心圆LOGO */
         .logo {
             width: 180px;
             height: 180px;
-            margin: 0 auto 20px;
+            margin: 0 auto;
             border-radius: 50%;
+            position: relative;
             background: 
                 radial-gradient(circle at center,
-                    rgba(255,255,255,1) 0%,
-                    rgba(0,200,255,0.8) 30%,
-                    rgba(0,100,200,0.5) 60%,
-                    transparent 80%);
+                    white 0%, white 10%,
+                    rgba(0, 247, 255, 0.9) 15%,
+                    rgba(0, 196, 204, 0.7) 30%,
+                    rgba(0, 150, 200, 0.5) 50%,
+                    transparent 70%);
             box-shadow: 
-                0 0 15px rgba(0,200,255,0.6),
-                0 0 30px rgba(0,150,255,0.4);
+                0 0 10px rgba(0, 247, 255, 0.6),
+                0 0 20px rgba(0, 196, 204, 0.4);
             animation: pulse 3s infinite alternate;
         }
         @keyframes pulse {
-            0% { transform: scale(0.98); opacity: 0.9; }
-            100% { transform: scale(1.02); opacity: 1; }
+            0% { transform: scale(0.98); }
+            100% { transform: scale(1.02); }
         }
-        /* 文字样式（完全保留原图效果） */
-        .title {
+        /* SPIN文字样式 */
+        .logo-text {
             font-size: 3rem;
             font-weight: bold;
-            margin: 10px 0;
-            letter-spacing: 2px;
+            margin: 20px 0 0;
+            letter-spacing: 3px;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
         }
+        /* 其他文字 */
         .tagline {
             font-size: 1.3rem;
             color: #00c8ff;
-            margin: 15px auto;
+            margin: 30px auto;
             max-width: 500px;
             line-height: 1.5;
-            letter-spacing: 1px;
         }
         .contact {
             margin-top: 40px;
@@ -63,11 +67,11 @@
     </style>
 </head>
 <body>
-    <!-- 纯发光圆球（无边框） -->
+    <!-- 同心圆LOGO + SPIN文字 -->
     <div class="logo"></div>
+    <div class="logo-text">SPIN</div>
     
-    <!-- 完全保留原图文字内容 -->
-    <div class="title">SPIN</div>
+    <!-- 其他内容 -->
     <div class="tagline">The calm before the creative storm</div>
     <div class="contact">Contact: info@spin-agi.com</div>
     <div class="copyright">© 2025 SPIN AGI. All Rights Reserved.</div>
