@@ -20,10 +20,10 @@
         }
         .logo-container {
             position: relative;
-            margin: 0 auto 30px;
+            margin-bottom: 40px; /* 增加LOGO与标语间距 */
         }
         .logo {
-            width: 180px;
+            width: 220px; /* 适当放大LOGO */
             filter: drop-shadow(0 0 25px rgba(0, 247, 255, 0.4));
             transition: transform 0.4s ease;
             cursor: pointer;
@@ -53,32 +53,26 @@
             visibility: visible;
             opacity: 1;
         }
-        h1 {
-            margin: 15px 0;
-            font-size: 3.2rem;
-            letter-spacing: 3px;
-            color: white;
-            text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
-        }
         .tagline {
-            font-size: 1.3rem;
-            letter-spacing: 1.5px;
-            margin: 25px auto;
+            font-size: 1.5rem; /* 放大标语字号 */
+            letter-spacing: 2px;
+            margin: 0 auto 30px;
             line-height: 1.6;
             max-width: 500px;
             background: linear-gradient(90deg, #fff, #00f7ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            padding: 0 20px;
         }
         .contact {
             margin-top: 40px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             letter-spacing: 0.5px;
         }
         .copyright {
-            margin-top: 10px;
-            font-size: 0.85rem;
+            margin-top: 15px;
+            font-size: 0.9rem;
             opacity: 0.8;
         }
     </style>
@@ -88,8 +82,6 @@
         <img src="spin-logo.png" alt="SPIN Logo" class="logo">
         <div class="logo-tooltip">Future in progress</div>
     </div>
-    
-    <h1>SPIN</h1>
     
     <div class="tagline">The calm before the creative storm</div>
     
