@@ -4,7 +4,7 @@
     <title>SPIN AGI | Coming Soon</title>
     <style>
         body {
-            background: #000;
+            background: #0a0a12;
             color: #fff;
             font-family: 'Arial', sans-serif;
             text-align: center;
@@ -14,66 +14,123 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            overflow: hidden;
         }
-        /* 多层同心圆LOGO */
         .logo {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 30px;
             border-radius: 50%;
-            position: relative;
             background: 
-                radial-gradient(circle at center,
-                    white 0%, white 10%,
-                    rgba(0, 247, 255, 0.9) 15%,
-                    rgba(0, 196, 204, 0.7) 30%,
-                    rgba(0, 150, 200, 0.5) 50%,
-                    transparent 70%);
+                radial-gradient(circle at 40% 40%, 
+                    rgba(255,255,255,0.9) 0%, 
+                    rgba(0, 247, 255, 0.7) 30%, 
+                    rgba(0, 196, 204, 0.3) 60%, 
+                    transparent 80%);
             box-shadow: 
-                0 0 10px rgba(0, 247, 255, 0.6),
-                0 0 20px rgba(0, 196, 204, 0.4);
-            animation: pulse 3s infinite alternate;
+                0 0 20px rgba(0, 247, 255, 0.6),
+                0 0 50px rgba(0, 196, 204, 0.4),
+                0 0 90px rgba(0, 150, 200, 0.2);
+            animation: pulse 4s infinite alternate;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
         }
         @keyframes pulse {
-            0% { transform: scale(0.98); }
-            100% { transform: scale(1.02); }
+            0% { transform: scale(0.98); opacity: 0.95; }
+            100% { transform: scale(1.02); opacity: 1; }
         }
-        /* SPIN文字样式 */
-        .logo-text {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 20px 0 0;
-            letter-spacing: 3px;
-            color: white;
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-        /* 其他文字 */
         .tagline {
-            font-size: 1.3rem;
-            color: #00c8ff;
-            margin: 30px auto;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
             max-width: 500px;
-            line-height: 1.5;
+            background: linear-gradient(90deg, #fff, #00f7ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
         }
         .contact {
             margin-top: 40px;
             font-size: 1rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
         }
         .copyright {
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 0.9rem;
             opacity: 0.8;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <!-- 同心圆LOGO + SPIN文字 -->
-    <div class="logo"></div>
-    <div class="logo-text">SPIN</div>
+    <div class="logo" title="Future in progress"></div>
     
-    <!-- 其他内容 -->
     <div class="tagline">The calm before the creative storm</div>
+    
     <div class="contact">Contact: info@spin-agi.com</div>
     <div class="copyright">© 2025 SPIN AGI. All Rights Reserved.</div>
+
+    <!-- 动态星空背景 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.zIndex = '0';
+            document.body.prepend(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // 星空粒子生成
+            const particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 1.5,
+                    color: `rgba(0, ${200 + Math.random() * 55}, ${200 + Math.random() * 55}, ${Math.random() * 0.4})`,
+                    speed: Math.random() * 0.1 + 0.02
+                });
+            }
+            
+            function animate() {
+                ctx.fillStyle = 'rgba(10, 10, 18, 0.2)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    
+                    p.y -= p.speed;
+                    if (p.y < 0) {
+                        p.y = canvas.height;
+                        p.x = Math.random() * canvas.width;
+                    }
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        });
+    </script>
 </body>
 </html>
