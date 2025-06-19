@@ -4,7 +4,7 @@
     <title>SPIN AGI | Coming Soon</title>
     <style>
         body {
-            background: #0a0a12;
+            background: #000;
             color: #fff;
             font-family: 'Arial', sans-serif;
             text-align: center;
@@ -14,123 +14,62 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow: hidden;
         }
+        /* 纯发光圆球LOGO */
         .logo {
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 30px;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
             border-radius: 50%;
             background: 
-                radial-gradient(circle at 40% 40%, 
-                    rgba(255,255,255,0.9) 0%, 
-                    rgba(0, 247, 255, 0.7) 30%, 
-                    rgba(0, 196, 204, 0.3) 60%, 
+                radial-gradient(circle at center,
+                    rgba(255,255,255,1) 0%,
+                    rgba(0,200,255,0.8) 30%,
+                    rgba(0,100,200,0.5) 60%,
                     transparent 80%);
             box-shadow: 
-                0 0 20px rgba(0, 247, 255, 0.6),
-                0 0 50px rgba(0, 196, 204, 0.4),
-                0 0 90px rgba(0, 150, 200, 0.2);
-            animation: pulse 4s infinite alternate;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
+                0 0 15px rgba(0,200,255,0.6),
+                0 0 30px rgba(0,150,255,0.4);
+            animation: pulse 3s infinite alternate;
         }
         @keyframes pulse {
-            0% { transform: scale(0.98); opacity: 0.95; }
+            0% { transform: scale(0.98); opacity: 0.9; }
             100% { transform: scale(1.02); opacity: 1; }
         }
-        .tagline {
-            font-size: 1.4rem;
+        /* 文字样式（完全保留原图效果） */
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 10px 0;
             letter-spacing: 2px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
+        }
+        .tagline {
+            font-size: 1.3rem;
+            color: #00c8ff;
+            margin: 15px auto;
             max-width: 500px;
-            background: linear-gradient(90deg, #fff, #00f7ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+            line-height: 1.5;
+            letter-spacing: 1px;
         }
         .contact {
             margin-top: 40px;
             font-size: 1rem;
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 1;
         }
         .copyright {
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 0.9rem;
             opacity: 0.8;
-            position: relative;
-            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <div class="logo" title="Future in progress"></div>
+    <!-- 纯发光圆球（无边框） -->
+    <div class="logo"></div>
     
+    <!-- 完全保留原图文字内容 -->
+    <div class="title">SPIN</div>
     <div class="tagline">The calm before the creative storm</div>
-    
     <div class="contact">Contact: info@spin-agi.com</div>
     <div class="copyright">© 2025 SPIN AGI. All Rights Reserved.</div>
-
-    <!-- 动态星空背景 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.createElement('canvas');
-            canvas.style.position = 'fixed';
-            canvas.style.top = '0';
-            canvas.style.left = '0';
-            canvas.style.zIndex = '0';
-            document.body.prepend(canvas);
-            
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            // 星空粒子生成
-            const particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 1.5,
-                    color: `rgba(0, ${200 + Math.random() * 55}, ${200 + Math.random() * 55}, ${Math.random() * 0.4})`,
-                    speed: Math.random() * 0.1 + 0.02
-                });
-            }
-            
-            function animate() {
-                ctx.fillStyle = 'rgba(10, 10, 18, 0.2)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                particles.forEach(p => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fillStyle = p.color;
-                    ctx.fill();
-                    
-                    p.y -= p.speed;
-                    if (p.y < 0) {
-                        p.y = canvas.height;
-                        p.x = Math.random() * canvas.width;
-                    }
-                });
-                
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-            
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-        });
-    </script>
 </body>
 </html>
