@@ -1,7 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPIN-AGI | Official Website</title>
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --secondary: #00c4cc;
+            --dark: #0a0a12;
+        }
+        body {
+            background: var(--dark);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-image: 
+                radial-gradient(circle at 75% 25%, rgba(0, 247, 255, 0.03) 0%, transparent 70%),
+                radial-gradient(circle at 25% 75%, rgba(0, 196, 204, 0.02) 0%, transparent 80%);
+        }
+        .main-logo {
+            width: 180px;
+            margin: 0 auto 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 247, 255, 0.3));
+        }
+        .company-name {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(0, 247, 255, 0.4);
+        }
+        .tagline {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+        .tagline em {
+            font-style: normal;
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(0, 247, 255, 0.5);
+        }
+        .nav-links {
+            margin-top: 50px;
+        }
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s;
+        }
+        .nav-links a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主LOGO（需替换为您的正式LOGO图片） -->
+    <img src="spin-logo.png" alt="SPIN-AGI Logo" class="main-logo">
+    
+    <!-- 公司名称（严格匹配截图） -->
+    <h1 class="company-name">SPIN</h1>
+    
+    <!-- 标语（保留截图中的创意高亮） -->
+    <p class="tagline">The calm before the <em>creative</em> storm</p>
+    
+    <!-- 新增导航链接（官网必要元素） -->
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#technology">Technology</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <!-- 动态背景（增强科技感） -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.zIndex = '-1';
+            canvas.style.opacity = '0.15';
+            document.body.prepend(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const colors = ['#00f7ff', '#00c4cc'];
+            
+            for (let i = 0; i < 60; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 1.5 + 0.5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 0.3 + 0.1
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    p.y -= p.speed;
+                    if (p.y < 0) {
+                        p.y = canvas.height;
+                        p.x = Math.random() * canvas.width;
+                    }
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        });
+    </script>
+</body>
+</html>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPIN-AGI | Official Website</title>
     <style>
