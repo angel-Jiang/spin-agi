@@ -14,66 +14,118 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background-image: 
+                radial-gradient(circle at 50% 40%, rgba(0, 247, 255, 0.03) 0%, transparent 70%),
+                radial-gradient(circle at 70% 70%, rgba(0, 196, 204, 0.02) 0%, transparent 80%);
         }
-        /* 多层同心圆LOGO */
-        .logo {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto;
-            border-radius: 50%;
+        .logo-container {
             position: relative;
-            background: 
-                radial-gradient(circle at center,
-                    white 0%, white 10%,
-                    rgba(0, 247, 255, 0.9) 15%,
-                    rgba(0, 196, 204, 0.7) 30%,
-                    rgba(0, 150, 200, 0.5) 50%,
-                    transparent 70%);
-            box-shadow: 
-                0 0 10px rgba(0, 247, 255, 0.6),
-                0 0 20px rgba(0, 196, 204, 0.4);
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 220px;
+            /* 纯发光圆球效果 */
+            filter: 
+                drop-shadow(0 0 15px rgba(0, 247, 255, 0.7))
+                drop-shadow(0 0 30px rgba(0, 196, 204, 0.4))
+                brightness(1.2);
             animation: pulse 3s infinite alternate;
+            cursor: pointer;
         }
         @keyframes pulse {
-            0% { transform: scale(0.98); }
-            100% { transform: scale(1.02); }
+            0% { opacity: 0.95; filter: drop-shadow(0 0 10px rgba(0, 247, 255, 0.6)); }
+            100% { opacity: 1; filter: drop-shadow(0 0 25px rgba(0, 247, 255, 0.9)); }
         }
-        /* SPIN文字样式 */
-        .logo-text {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 20px 0 0;
-            letter-spacing: 3px;
-            color: white;
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-        /* 其他文字 */
         .tagline {
-            font-size: 1.3rem;
-            color: #00c8ff;
-            margin: 30px auto;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
             max-width: 500px;
-            line-height: 1.5;
+            background: linear-gradient(90deg, #fff, #00f7ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 0 20px;
         }
         .contact {
             margin-top: 40px;
             font-size: 1rem;
+            letter-spacing: 0.5px;
         }
         .copyright {
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 0.9rem;
             opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <!-- 同心圆LOGO + SPIN文字 -->
-    <div class="logo"></div>
-    <div class="logo-text">SPIN</div>
+    <div class="logo-container">
+        <img src="spin-logo.png" alt="" class="logo"> <!-- 移除alt文字 -->
+    </div>
     
-    <!-- 其他内容 -->
     <div class="tagline">The calm before the creative storm</div>
+    
     <div class="contact">Contact: info@spin-agi.com</div>
     <div class="copyright">© 2025 SPIN AGI. All Rights Reserved.</div>
+
+    <!-- 星空粒子背景 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.zIndex = '-1';
+            canvas.style.opacity = '0.12';
+            document.body.prepend(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const colors = ['#00f7ff', '#00c4cc', '#ffffff'];
+            
+            // 减少粒子数量增强深空感
+            for (let i = 0; i < 40; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 1.2 + 0.3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 0.2 + 0.05,
+                    alpha: Math.random() * 0.6 + 0.2
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color.replace(')', `, ${p.alpha})`).replace('rgb', 'rgba');
+                    ctx.fill();
+                    
+                    p.y -= p.speed;
+                    if (p.y < 0) {
+                        p.y = canvas.height;
+                        p.x = Math.random() * canvas.width;
+                    }
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        });
+    </script>
 </body>
 </html>
